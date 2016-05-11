@@ -1,0 +1,24 @@
+{
+  "name": "faviconoclast",
+  "version": "0.0.1",
+  "description": "Finds an icon for a given web page.",
+  "author": {
+    "name": "Cory LaFlamme",
+    "email": "me@corylaflamme.com",
+    "url": "http://corylaflamme.com"
+  },
+  "keywords": [
+    "favicon",
+    "icon",
+    "icons",
+    "extract"
+  ],
+  "license": "ISC",
+  "main": "fetch.js",
+  "bin": "cli.js",
+  "dependencies": {
+    "htmlparser2": "^3.9.0",
+    "minimist": "^1.2.0",
+    "superagent": "^1.8.3"
+  }
+}
