@@ -59,8 +59,9 @@ function parseResults(pageUrl, cb, err, res) {
   });
 
   const baseUrl = `${ res.request.protocol }//${ res.request.host }`;
+  const href = links[0] ? url.resolve(baseUrl, links[0].href) : '';
 
-  cb(null, url.resolve(baseUrl, links[0].href));
+  cb(null, url.resolve(baseUrl, href));
 
 }
 
