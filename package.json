@@ -2,6 +2,7 @@
   "name": "faviconoclast",
   "version": "0.0.1",
   "description": "Finds an icon for a given web page.",
+  "repository": "claflamme/faviconoclast",
   "author": {
     "name": "Cory LaFlamme",
     "email": "me@corylaflamme.com",
