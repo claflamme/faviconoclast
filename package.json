@@ -1,6 +1,6 @@
 {
   "name": "faviconoclast",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Finds an icon for a given web page.",
   "repository": "claflamme/faviconoclast",
   "author": {
