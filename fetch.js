@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const url = require('url');
 const superagent = require('superagent');
@@ -36,7 +36,7 @@ function extractLinkNodes(text) {
 
 function filterLinkNodes(linksArray) {
 
-  return linksArray.filter((link, i) => {
+  return linksArray.filter((link) => {
     return validRelValues.some((rel) => {
       return rel === link.rel;
     });

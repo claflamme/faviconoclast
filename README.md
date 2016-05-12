@@ -39,5 +39,4 @@ faviconoclast('cnn.com', (err, iconUrl) => {
 $ faviconoclast cnn.com
 
 # http://i.cdn.turner.com/cnn/.e/img/3.0/global/misc/apple-touch-icon.png
-
 ```

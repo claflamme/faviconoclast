@@ -1,7 +1,7 @@
 {
   "name": "faviconoclast",
   "version": "0.0.2",
-  "description": "Finds an icon for a given web page.",
+  "description": "Find (fav)icon URLs for any given web page.",
   "repository": "claflamme/faviconoclast",
   "author": {
     "name": "Cory LaFlamme",
@@ -17,9 +17,15 @@
   "license": "ISC",
   "main": "fetch.js",
   "bin": "cli.js",
+  "scripts": {
+    "lint": "eslint ."
+  },
   "dependencies": {
     "htmlparser2": "^3.9.0",
     "minimist": "^1.2.0",
     "superagent": "^1.8.3"
+  },
+  "devDependencies": {
+    "eslint": "^2.9.0"
   }
 }
