@@ -14,12 +14,17 @@ const validRelValues = [
 
 function extractLinkNodes(text) {
 
-  let links = [];
+  let linkNodes = [];
 
   const parser = new htmlparser.Parser({
     onopentag: (name, attributes) => {
-      if (name === 'link') {
-        links.push(attributes);
+      if (name !== 'link') {
+        return;
+      }
+      const rel = attributes.rel.toLowerCase();
+      // Only include <link> elements with icon-related "rel" values.
+      if (validRelValues.includes(rel)) {
+        linkNodes.push(Object.assign(attributes, { rel }));
       }
     }
   });
@@ -27,20 +32,15 @@ function extractLinkNodes(text) {
   parser.write(text);
   parser.end();
 
-  return links.map((link) => {
-    const newAttributes = { rel: link.rel.toLowerCase() };
-    return Object.assign(link, newAttributes);
+  // Sort <link> nodes so that "rel" values are in the same order as the
+  // list of desired rel types.
+  linkNodes.sort((a, b) => {
+    let aRel = validRelValues.indexOf(a.rel);
+    let bRel = validRelValues.indexOf(b.rel);
+    return aRel - bRel;
   });
 
-}
-
-function filterLinkNodes(linksArray) {
-
-  return linksArray.filter((link) => {
-    return validRelValues.some((rel) => {
-      return rel === link.rel;
-    });
-  });
+  return linkNodes.map( link => link.href );
 
 }
 
@@ -50,18 +50,14 @@ function parseResults(pageUrl, cb, err, res) {
     return cb(err);
   }
 
-  let links = filterLinkNodes(extractLinkNodes(res.text));
-
-  links.sort((a, b) => {
-    let aRel = validRelValues.indexOf(a.rel);
-    let bRel = validRelValues.indexOf(b.rel);
-    return aRel - bRel;
-  });
-
   const baseUrl = `${ res.request.protocol }//${ res.request.host }`;
-  const href = links[0] ? url.resolve(baseUrl, links[0].href) : '';
+  let linkNodes = extractLinkNodes(res.text);
 
-  cb(null, url.resolve(baseUrl, href));
+  if (linkNodes.length > 0) {
+    return cb(null, url.resolve(baseUrl, linkNodes[0]));
+  }
+
+  cb(null, url.resolve(baseUrl, 'favicon.ico'));
 
 }
 
